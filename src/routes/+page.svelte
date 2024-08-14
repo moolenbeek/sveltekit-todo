@@ -1,15 +1,29 @@
 <script>
 	import { focusTrap } from '@skeletonlabs/skeleton';
 	export let data;
+	export let form;
 </script>
 
 <div class="container m-auto max-w-xs">
 	<h1>todos</h1>
 
+	{#if form?.error}
+		<p class="text-error-500">{form.error}</p>
+	{/if}
+
 	<form use:focusTrap={true} method="POST" action="?/create">
 		<label>
 			add a todo:
-			<input data-focusindex="0" name="description" autocomplete="off" class="input" type="text" placeholder="Input" />
+			<input 
+				data-focusindex="0" 
+				name="description" 
+				autocomplete="off" 
+				class="input" 
+				type="text" 
+				placeholder="Input"
+				value={form?.description ?? ''}
+				required 
+			/>
 		</label>
 	</form>
 
