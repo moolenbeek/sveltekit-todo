@@ -2,25 +2,26 @@ const db = new Map();
 
 export function getTodos(userid) {
 	if (!db.get(userid)) {
-		db.set(userid, [{
-			id: crypto.randomUUID(),
-			description: 'finish todo app',
-			done: false
-		}]);
+		db.set(userid, [
+			{
+				id: crypto.randomUUID(),
+				description: 'finish todo app',
+				done: false
+			}
+		]);
 	}
-
 	return db.get(userid);
 }
 
 export function createTodo(userid, description) {
-	if (description === "") {
-		throw new Error("todo must have a description");
+	if (description === '') {
+		throw new Error('todo must have a description');
 	}
 
 	const todos = db.get(userid);
 
 	if (todos.find((todo) => todo.description === description)) {
-		throw new Error("todos must be unique");
+		throw new Error('todos must be unique');
 	}
 
 	todos.push({
